@@ -1,8 +1,9 @@
-from app.core.firebase import db
+from app.data_providers.provider_factory import get_provider
+
+provider = get_provider()
 
 class SantriRepository:
 
     @staticmethod
     def get_all_santri():
-        docs = db.collection("santri_master").stream()
-        return [doc.to_dict() for doc in docs]
+        return provider.get_all_santri()

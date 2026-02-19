@@ -1,13 +1,9 @@
-from app.core.firebase import db
+from app.data_providers.provider_factory import get_provider
+
+provider = get_provider()
 
 class HafalanRepository:
 
     @staticmethod
     def get_hafalan_by_periode(bulan: str, tahun: str):
-        docs = (
-            db.collection("hafalan_harian_santri")
-            .where("bulan", "==", bulan)
-            .where("tahun", "==", tahun)
-            .stream()
-        )
-        return [doc.to_dict() for doc in docs]
+        return provider.get_hafalan_by_periode(bulan, tahun)
